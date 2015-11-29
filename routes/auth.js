@@ -27,17 +27,22 @@ router.get('/', function (req, res, next) {
 //Accepts accessToken
 router.get('/login', function (req, res, next) {
   var oauth2Client = new OAuth2(googleClientId, googleClientSecret, googleRedirectUrl);
-  var code = req.query.accessToken;
+  var code = req.query.code;
 
-  oauth2Client.getToken(code, function (err, tokens) {
-    // Now tokens contains an access_token and an optional refresh_token. Save them.
+  oauth2Client.getToken(code, function (err, tokens) {    
     if (!err) {
       oauth2Client.setCredentials(tokens);
       plus.people.get({ userId: 'me', auth: oauth2Client }, function (err, response) {
-        res.send(response);
+        var me ={
+          id: response.id,          
+          name: response.displayName,
+          thumbnailUrl: response.image.url
+        };
+                
+        res.send(me);
       });
     } else {
-      res.send("Error");
+      res.send({error:err,code:code});
     }
   });
 });
