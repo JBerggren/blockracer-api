@@ -9,6 +9,7 @@ var jwtHandler = require('./jwt-handler');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var auth = require('./routes/auth');
+var lobby = require('./routes/lobby');
 
 var app = express();
 
@@ -26,8 +27,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/auth',auth);
-app.use(jwtHandler);
 app.use('/users', users);
+app.use('/lobby', lobby);
+app.use(jwtHandler);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
