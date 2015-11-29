@@ -25,9 +25,9 @@ router.get('/', function (req, res, next) {
 });
 
 //Accepts accessToken
-router.post('/login', function (req, res, next) {
+router.get('/login', function (req, res, next) {
   var oauth2Client = new OAuth2(googleClientId, googleClientSecret, googleRedirectUrl);
-  var code = req.params.accessToken;
+  var code = req.query.accessToken;
 
   oauth2Client.getToken(code, function (err, tokens) {
     // Now tokens contains an access_token and an optional refresh_token. Save them.
