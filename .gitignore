@@ -27,7 +27,7 @@ build/Release
 node_modules
 
 # Configuration file for Azure documentDB
-config/azureDocumentDB.config
+config
 
 # Intellij
 .idea
