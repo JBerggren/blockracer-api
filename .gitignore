@@ -32,3 +32,5 @@ config
 # Intellij
 .idea
 blockracer-api.iml
+
+setupEnv.bat
